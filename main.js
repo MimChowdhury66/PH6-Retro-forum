@@ -72,7 +72,7 @@ const displayPosts = posts => {
     // console.log(posts);
     const postContainer = document.getElementById('allPosts');
     posts.forEach(post => {
-        console.log(post);
+        // console.log(post);
 
         const allPosts = document.createElement('div');
         allPosts.classList = 'hero bg-base-200 grid grid-cols-1 rounded-3xl ';
@@ -84,9 +84,9 @@ const displayPosts = posts => {
             <div
                 class="indicator">
                 <span
-                    class="indicator-item badge badge-secondary"></span>
+                    class="indicator-item badge ${post.isActive ? "bg-[#10B981]" : "bg-[#FF3434]"} "></span>
                 <img class="w-[92px] h-[72px] rounded-2xl lg:mb-28"
-                    src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
+                    src="${post.image}"
                     class="max-w-sm rounded-lg shadow-2xl" />
             </div>
 
@@ -94,41 +94,21 @@ const displayPosts = posts => {
             <div>
                 <div
                     class="flex gap-5 mb-2">
-                    <p>#Comedy
+                    <p>#${post.category
+            }
                     </p>
                     <p>Author:
-                        Name
+                        ${post.author.name}
                     </p>
                 </div>
                 <h1
                     class="text-xl font-bold">
-                    Box
-                    Office
-                    News!
+                    ${post.title}
                 </h1>
                 <p
                     class="pt-2 pb-2 border-b-2 border-dashed">
-                    Provident
-                    cupiditate
-                    voluptatem
-                    et
-                    in.
-                    Quaerat
-                    fugiat
-                    ut
-                    assumenda
-                    excepturi
-                    exercitationem
-                    quasi.
-                    In
-                    deleniti
-                    eaque
-                    aut
-                    repudiandae
-                    et
-                    a
-                    id
-                    nisi.
+                    ${post.
+                description}
                 </p>
                 <div
                     class="flex justify-between ">
@@ -136,13 +116,13 @@ const displayPosts = posts => {
                         class="mt-6 space-x-2">
                         <i
                             class="fa-regular fa-comment-dots "></i>
-                        500
+                        ${post.comment_count}
                         <i
                             class="fa-regular fa-eye"></i>
-                        1568
+                        ${post.view_count}
                         <i
                             class="fa-regular fa-clock"></i>
-                        5
+                        ${post.posted_time}
                         min
                     </div>
                     <button
