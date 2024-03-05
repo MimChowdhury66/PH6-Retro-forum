@@ -135,9 +135,12 @@
                             <div
                                 class=" rounded-full join ">
                                 <input
+                                    id="input-field"
                                     class="input input-bordered join-item p-0 lg:p-4"
                                     placeholder="Search Here Anything" />
                                 <button
+                                    onclick="handleSearch()"
+                                    id="search-btn"
                                     class="btn join-item rounded-full bg-[#797DFC] text-white lg:text-xl">search</button>
                             </div>
                         </div>
@@ -239,11 +242,30 @@
                         class="grid gap-5 lg:gap-10 lg:w-[700px]">
 
                     </div>
-                    <div class=" lg:w-[380px] flex justify-between">
-                        <h1>Title
-                        </h1>
-                        <p>Mark as Read ()</p>
+                    <div id="mark-read"
+                        class=" lg:w-[480px] grid lg:h-0 justify-center ">
+                        <div
+                            class="flex justify-between  lg:w-[480px] ">
+                            <h1
+                                class="text-xl font-bold">
+                                Title
+                            </h1>
+                            <p><i
+                                    class="fa-solid fa-check-double text-green-600"></i>
+                                Mark
+                                As
+                                Read
+                                <span
+                                    id="read-count">(0)</span>
+                            </p>
+                        </div>
+                        <div
+                            class="flex justify-between">
+
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </section>
