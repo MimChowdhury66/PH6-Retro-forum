@@ -1,12 +1,14 @@
 const loadCard = async () => {
-    loadingSpinner(true);
-
+    
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
     const data = await res.json();
     const cards = [data];
     cards.forEach(function (card) {
         // console.log(card);
-        displayCards(card)
+        setTimeout(() => {
+            displayCards(card)
+
+        }, loadingSpinner(true), 2000)
     })
 
 }
@@ -23,34 +25,34 @@ const displayCards = cards => {
         const latestCards = document.createElement('div');
         latestCards.classList = 'card lg:w-96 bg-base-100 shadow-xl';
         latestCards.innerHTML = `
-        <figure>
-            <img class="p-8 pb-0 " src="${card.cover_image}"
-                alt="" />
-        </figure>
-        <div class="card-body">
-        <p><i class="fa-solid fa-calendar-plus"></i> ${card.author?.posted_date || 'No publish Date'}</p>
-
-            <h2 class="card-title text-xl font-extrabold">
-                ${card.title}
-            </h2>
-            <p>${card.description}
+            <figure>
+                <img class="p-8 pb-0 " src="${card.cover_image}"
+                    alt="" />
+            </figure>
+            <div class="card-body">
+            <p><i class="fa-solid fa-calendar-plus"></i> ${card.author?.posted_date || 'No publish Date'}</p>
+    
+                <h2 class="card-title text-xl font-extrabold">
+                    ${card.title}
+                </h2>
+                <p>${card.description}
+                </p>
+                </div>
+    
+            <div class="flex m-4 mt-0 gap-4">
+            <img class="w-[44px] h-[44px] rounded-full" src="${card.profile_image
+            }"
+                    alt="" />
+            <div>
+            <h4>${card.author.name}
+            </h4>
+            <p>${card.author?.designation || 'Unknown'}
             </p>
             </div>
-
-        <div class="flex m-4 mt-0 gap-4">
-        <img class="w-[44px] h-[44px] rounded-full" src="${card.profile_image
-            }"
-                alt="" />
-        <div>
-        <h4>${card.author.name}
-        </h4>
-        <p>${card.author?.designation || 'Unknown'}
-        </p>
-        </div>
-        </div>
-        
-        
-    `;
+            </div>
+            
+            
+        `;
 
         cardContainer.appendChild(latestCards);
 
@@ -63,14 +65,20 @@ const displayCards = cards => {
 }
 
 
+
+
+
 const loadPost = async () => {
-    loadingLoader(true)
+
 
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts');
     const data = await res.json();
     const posts = data.posts;
     // console.log(posts);
-    displayPosts(posts);
+    setTimeout(() => {
+        displayPosts(posts);
+    }, loadingLoader(true), 2000)
+
     allPost = posts;
 
 
