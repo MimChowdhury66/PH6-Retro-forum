@@ -1,4 +1,6 @@
 const loadCard = async () => {
+    loadingSpinner(true);
+
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
     const data = await res.json();
     const cards = [data];
@@ -6,7 +8,6 @@ const loadCard = async () => {
         // console.log(card);
         displayCards(card)
     })
-
 
 }
 
@@ -54,12 +55,17 @@ const displayCards = cards => {
         cardContainer.appendChild(latestCards);
 
 
-    })
+    });
+
+    // hide loading spinner
+    loadingSpinner(false)
 
 }
 
 
 const loadPost = async () => {
+    loadingLoader(true)
+
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts');
     const data = await res.json();
     const posts = data.posts;
@@ -73,6 +79,7 @@ const loadPost = async () => {
 
 const displayPosts = posts => {
     // console.log(posts);
+
     const postContainer = document.getElementById('allPosts');
     // postContainer.textContent = '';
 
@@ -145,7 +152,11 @@ const displayPosts = posts => {
 
     `;
         postContainer.appendChild(allPosts)
-    })
+    });
+
+    loadingLoader(false);
+
+
 }
 
 
@@ -153,6 +164,7 @@ const displayPosts = posts => {
 
 // handle search button
 const loadSearch = async (searchText) => {
+    loadingLoader(true);
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`);
     const data = await res.json();
     const posts = data.posts;
@@ -233,7 +245,8 @@ const displaySearch = posts => {
 
     `;
         postContainer.appendChild(allPosts)
-    })
+    });
+    loadingLoader(false)
 
 }
 
@@ -262,7 +275,7 @@ const displayMark = post => {
     const postContainer = document.getElementById('mark-read');
 
     const markedPost = document.createElement('div');
-    markedPost.classList = 'flex justify-between gap-2 py-2 ';
+    markedPost.classList = 'flex justify-between gap-2 p-2 border m-2 bg-base-200 rounded-2xl';
     markedPost.innerHTML = `
     <h1 class="lg:text-lg lg:font-semibold">${post.title}</h1>
     <p><i class="fa-regular fa-eye"></i>${post.view_count}</p>
@@ -281,6 +294,29 @@ const handleMark = (id) => {
 
 
 
+// loading function
+const loadingSpinner = (isLoading) => {
+    const spinner = document.getElementById('loading-spinner');
+    if (isLoading) {
+        spinner.classList.remove('hidden');
+
+
+    }
+    else {
+        spinner.classList.add('hidden')
+
+    }
+}
+
+const loadingLoader = (isLoading) => {
+    const loader = document.getElementById('loading-loader');
+    if (isLoading) {
+        loader.classList.remove('hidden')
+    }
+    else {
+        loader.classList.add('hidden')
+    }
+}
 
 
 
